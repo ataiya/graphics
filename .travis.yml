@@ -13,10 +13,6 @@
 # limitations under the License.
 language: python
 
-env:
-  - TENSORFLOW=tensorflow
-  - TENSORFLOW=tf-nightly
-
 before_install:
   - pip install $TENSORFLOW
   - wget -O install.sh "https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh"
@@ -31,19 +27,24 @@ before_install:
   - pip install -U flake8
   - pip install -r requirements.txt
 
-stages:
-  - lint_flake8
-  - blaze_test
-  - build_pip
-
 jobs:
   include:
-    - stage: lint_flake8
-      script: flake8 --config=.flake8 ./tensorflow_graphics/
-    - stage: blaze_test
-      script: bazel test //tensorflow_graphics/...
-    - stage: build_pip
-      script: 
-        - python setup.py --compute_platform cpu sdist bdist_wheel --universal
-        - pip install dist/tensorflow_graphics*.whl
-        - cd $(mktemp -d) && python -c 'import tensorflow_graphics as tfg'
+    - os: linux
+      python: 3.6
+      install:
+        - pip install -U tensorflow
+    - os: linux
+      python: 3.6
+      install:
+        - pip install -U tf-nightly
+
+script:
+  # --- run linter
+  - flake8 --config=.flake8 ./tensorflow_graphics/
+  # --- test the codebase
+  - bazel test //tensorflow_graphics/...
+  # --- build pip package
+  - python setup.py --compute_platform cpu sdist bdist_wheel --universal
+  - pip install dist/tensorflow_graphics*.whl
+  # --- test the pip package 
+  - cd $(mktemp -d) && python -c 'import tensorflow_graphics as tfg'
