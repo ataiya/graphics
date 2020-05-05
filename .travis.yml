@@ -17,11 +17,13 @@ language: python
 
 jobs:
   include:
-    - os: linux
+    - name: TensorFlow Release
+      os: linux
       python: 3.6
       before_install:
         - pip install -U tensorflow
-    - os: linux
+    - name: TensorFlow Nightly
+      os: linux
       python: 3.6
       before_install:
         - pip install -U tf-nightly
