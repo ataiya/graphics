@@ -47,8 +47,8 @@ jobs:
 #   - name: update integration test
 #     - script: echo "Running job 1"
 
+script: echo "Running script 0"
 script: echo "Running script 1"
-script: echo "Running script 2"
 
 
 # script:
