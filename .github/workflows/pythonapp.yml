@@ -39,6 +39,7 @@ jobs:
         pip install flake8
     - name: Install dependencies
       run: |
+        pip install tensorflow
         pip install -r requirements.txt
     - name: Test with pytest
       run: |
