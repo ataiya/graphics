@@ -14,7 +14,6 @@
 language: python
 
 before_install:
-  - pip install $TENSORFLOW
   - wget -O install.sh "https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh"
   - chmod +x install.sh
   - ./install.sh --user
