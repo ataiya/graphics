@@ -26,14 +26,32 @@ language: python
 #   - pip install -U flake8
 #   - pip install -r requirements.txt
 
-jobs:
-  include:
-    - os: linux
-      python: 2.7
+env:
+  - TENSORFLOW=tensorflow
+  - TENSORFLOW=tf-nightly
+
+before_install:
+  - pip install $TENSORFLOW
+
+script: python -c "import tensorflow as tf; print(tf.__version__)"
+
+# script: python -c "import tensorflow as tf; 
+# jobs:
+#   include:
+#     - stage: deploy
+#       script: echo Deploy
+#       # Keep in mind to overwrite these here
+#       rvm: 2.3
+#       env: FOO=foo
+
+# jobs:
+#   include:
+#     - os: linux
+#       python: 2.7
 #       install:
 #         - pip install -U tensorflow
-    - os: linux
-      python: 3.6
+#     - os: linux
+#       python: 3.6
 #       install:
 #         - pip install -U tensorflow
 #     - os: linux
@@ -46,9 +64,6 @@ jobs:
 #   - test
 #   - name: update integration test
 #     - script: echo "Running job 1"
-
-script: echo "Running script 0"
-script: echo "Running script 1"
 
 
 # script:
