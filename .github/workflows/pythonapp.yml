@@ -42,4 +42,4 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest
       run: |
-        pytest tensorflow_graphics/nn/layer/tests/pointnet_tests.py
+        pytest tensorflow_graphics/nn/layer/tests/pointnet_test.py
