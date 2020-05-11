@@ -31,3 +31,7 @@ jobs:
         # pip install pytest
         pip install flake8
         flake8 --config=.flake8 tensorflow_graphics/
+    - name: Requirement
+      run: |
+        pip install tensorflow
+        pip install -r requirements.txt
