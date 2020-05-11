@@ -16,16 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.8
+    - name: Set up Python 3.7.7
       uses: actions/setup-python@v1
       with:
-        python-version: 3.8
-    - name: Install bazel
-      run: |
-        wget -O install.sh "https://github.com/bazelbuild/bazel/releases/download/0.26.1/bazel-0.26.1-installer-linux-x86_64.sh"
-        chmod +x install.sh
-        ./install.sh --user
-        rm -f install.sh
+        python-version: 3.7.7
     - name: Install system dependencies
       run: |
         sudo apt-get -y install libopenexr-dev
